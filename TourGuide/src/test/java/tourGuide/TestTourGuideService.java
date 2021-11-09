@@ -9,10 +9,6 @@ import java.util.UUID;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import gpsUtil.GpsUtil;
-import gpsUtil.location.Attraction;
-import gpsUtil.location.VisitedLocation;
-import rewardCentral.RewardCentral;
 import tourGuide.helper.InternalTestHelper;
 import tourGuide.service.RewardsService;
 import tourGuide.service.TourGuideService;
@@ -21,7 +17,7 @@ import tripPricer.Provider;
 
 public class TestTourGuideService {
 
-	@Test
+	/*@Test
 	public void getUserLocation() {
 		GpsUtil gpsUtil = new GpsUtil();
 		RewardsService rewardsService = new RewardsService(gpsUtil, new RewardCentral());
@@ -123,7 +119,7 @@ public class TestTourGuideService {
 		tourGuideService.tracker.stopTracking();
 		
 		assertEquals(10, providers.size());
-	}
+	}*/
 	
 	
 }

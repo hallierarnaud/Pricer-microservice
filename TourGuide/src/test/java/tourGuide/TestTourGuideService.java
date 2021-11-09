@@ -9,10 +9,6 @@ import java.util.UUID;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import tourGuide.helper.InternalTestHelper;
-import tourGuide.service.RewardsService;
-import tourGuide.service.TourGuideService;
-import tourGuide.user.User;
 import tripPricer.Provider;
 
 public class TestTourGuideService {

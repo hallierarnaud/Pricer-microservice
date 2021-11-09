@@ -5,8 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
-import tourGuide.service.TourGuideService;
 import tripPricer.Provider;
 import tripPricer.TripPricer;
 
@@ -17,11 +17,10 @@ public class PricerService {
   private final TripPricer tripPricer = new TripPricer();
   private static final String tripPricerApiKey = "test-server-api-key";
 
-  public List<Provider> getTripDeals(User user) {
-    int cumulatativeRewardPoints = user.getUserRewards().stream().mapToInt(i -> i.getRewardPoints()).sum();
-    List<Provider> providers = tripPricer.getPrice(tripPricerApiKey, user.getUserId(), user.getUserPreferences().getNumberOfAdults(),
-            user.getUserPreferences().getNumberOfChildren(), user.getUserPreferences().getTripDuration(), cumulatativeRewardPoints);
-    user.setTripDeals(providers);
+  public List<Provider> getTripDeals(UUID userId, int numberOfAdults, int numberOfChildren, int tripDuration,
+                                     int cumulativeRewardPoints) {
+    List<Provider> providers = tripPricer.getPrice(tripPricerApiKey, userId, numberOfAdults, numberOfChildren,
+            tripDuration, cumulativeRewardPoints);
     return providers;
   }
 

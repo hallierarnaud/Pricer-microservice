@@ -14,8 +14,12 @@ import tripPricer.TripPricer;
 public class PricerService {
 
   private Logger logger = LoggerFactory.getLogger(PricerService.class);
-  private final TripPricer tripPricer = new TripPricer();
+  private final TripPricer tripPricer;
   private static final String tripPricerApiKey = "test-server-api-key";
+
+  public PricerService(TripPricer tripPricer) {
+    this.tripPricer = tripPricer;
+  }
 
   public List<Provider> getTripDeals(UUID userId, int numberOfAdults, int numberOfChildren, int tripDuration,
                                      int cumulativeRewardPoints) {

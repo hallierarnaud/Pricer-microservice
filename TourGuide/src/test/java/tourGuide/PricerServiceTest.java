@@ -1,33 +1,39 @@
 package tourGuide;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import tourGuide.pricer.service.PricerService;
 import tripPricer.Provider;
+import tripPricer.TripPricer;
 
-import static org.hamcrest.Matchers.hasSize;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
 
+@RunWith(MockitoJUnitRunner.class)
 public class PricerServiceTest {
 
   @Test
   public void getTripDeals_shouldReturnOk() {
     // GIVEN
-    PricerService pricerService = new PricerService();
+    TripPricer tripPricer = Mockito.mock(TripPricer.class);
+    PricerService pricerService = new PricerService(tripPricer);
+    List<Provider> providers = new ArrayList<>();
     UUID userId = UUID.randomUUID();
-    int numberOfAdults = 1;
-    int numberOfChildren = 1;
-    int tripDuration = 1;
-    int cumulativeRewardPoints = 100;
+    Provider provider = new Provider(userId, "Holiday Travels", 100);
+    providers.add(provider);
+    Mockito.when(tripPricer.getPrice("test-server-api-key", userId, 1, 1, 1, 100)).thenReturn(providers);
 
     // WHEN
-    List<Provider> providers = pricerService.getTripDeals(userId, numberOfAdults, numberOfChildren, tripDuration, cumulativeRewardPoints);
+    List<Provider> providersExpected = pricerService.getTripDeals(userId, 1, 1, 1, 100);
 
     // THEN
-    assertThat(providers, hasSize(5));
+    assertEquals(providers, providersExpected);
   }
 
 }

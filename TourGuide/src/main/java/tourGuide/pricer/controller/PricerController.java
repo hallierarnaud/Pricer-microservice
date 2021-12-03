@@ -17,6 +17,15 @@ public class PricerController {
   @Autowired
   private PricerService pricerService;
 
+  /**
+   *
+   * @param userId an id of a user
+   * @param numberOfAdults the number of adults wished for the trip
+   * @param numberOfChildren the number of children wished for the trip
+   * @param tripDuration the duration wished for the trip
+   * @param cumulativeRewardPoints the reward points cumulate by the user
+   * @return a list of the trips proposed by the providers
+   */
   @GetMapping("/tripDeals")
   public List<Provider> getTripDeals(@RequestParam UUID userId, @RequestParam int numberOfAdults,
                                      @RequestParam int numberOfChildren, @RequestParam int tripDuration,
